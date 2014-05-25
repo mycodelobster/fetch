@@ -13,21 +13,48 @@ class Alert {
 
 	function show(){
 		$CI =& get_instance();
+
+		$alert = '';
 		if($CI->session->flashdata('alert_success')){
-			echo "<div class='alert alert-success'>";
-			echo $CI->session->flashdata('alert_success');
-			echo "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
+			$alert .= "<div class='alert alert-success'>";
+			$alert .= $CI->session->flashdata('alert_success');
+			$alert .= "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
 		}
 		if($CI->session->flashdata('alert_error')){
-			echo "<div class='alert alert-danger'>";
-			echo $CI->session->flashdata('alert_error');
-			echo "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
+			$alert .= "<div class='alert alert-danger'>";
+			$alert .= $CI->session->flashdata('alert_error');
+			$alert .= "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
 		}
 		if($CI->form_validation->error_array()){
-			echo "<div class='alert alert-danger'>";
-			echo strtoupper($CI->form_validation->error_array());
-			echo "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
+			$alert .= "<div class='alert alert-danger'>";
+			$alert .= strtoupper($CI->form_validation->error_array());
+			$alert .= "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
 		}
+		return $alert;
+	}
+
+	function show_success($msg='')
+	{
+		$CI =& get_instance();
+		$alert = '';
+		if($msg!=''){
+			$alert .= "<div class='alert alert-success'>";
+			$alert .= $msg;
+			$alert .= "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
+		}
+		return $alert;
+	}
+
+	function show_error($msg='')
+	{
+		$CI =& get_instance();
+		$alert = '';
+		if($msg!=''){
+			$alert .= "<div class='alert alert-danger'>";
+			$alert .= $msg;
+			$alert .= "<a class='close' data-dismiss='alert' href='#'>&times;</a></div>";
+		}
+		return $alert;
 	}
 
 }
