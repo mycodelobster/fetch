@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Form Validation Edit Uniqe
-* http://forrst.com/posts/Validating_Uniqueness_In_CodeIgniter_When_Updati-DDA
+* MY_Form_validation.php
+* Source : http://forrst.com/posts/Validating_Uniqueness_In_CodeIgniter_When_Updati-DDA
 **/
 class MY_Form_validation extends CI_Form_validation{
 
@@ -10,14 +10,6 @@ class MY_Form_validation extends CI_Form_validation{
 		parent::__construct($config);
 		$this->_error_prefix = '<div class="alert alert-error">';
 		$this->_error_suffix = '<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
-	}
-
-	function generate($input){
-		$CI =& get_instance();
-		foreach ($input as  $name) {
-			$CI->form_validation->set_rules($name,ucfirst($name),'trim|required|xss_clean');
-		}
-		return $CI;
 	}
 
 	function edit_unique($value, $params){
@@ -73,8 +65,12 @@ class MY_Form_validation extends CI_Form_validation{
 			return TRUE;
 		}
 	}
+
+	/**
+	 * http://stackoverflow.com/questions/4676915/form-validation-errors-into-array
+	 * Generate Single Error Line
+	 */
 	public function error_array(){
-		// http://stackoverflow.com/questions/4676915/form-validation-errors-into-array
 		$error = $this->_error_array;
 		if($error){
 			foreach($error as $key => $value){
